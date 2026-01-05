@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Components
+            <!-- Components are pieces of a website, react helps us build reusable components -->
+        </title>
+    </head>
+    <body>
+        <!-- the container that react has access to-->
+        <div class="js-container"></div>
+
+        <!-- loading react scripts into the site-->
+        <script src="https://unpkg.com/supersimpledev/react.js"></script>
+        <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+        <!-- Babel is a JS compiler that helps run JSX-->
+        <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+        <script type="text/babel">
+            // TO create a component in react we will use a function
+            // The component name must start with a capital letter
+            function ChatInput(){ 
+                // JSX is more strict than HTML so all tags need an ending tag so this is equivalent to <input></input>
+                return (
+                    <>
+                        <input placeholder="Send a message" size="30"/>
+                        <button>Send</button>
+                    </> // the function only returns 1 element so to make it return both input and button we have to put it inside a div element. OR a fragment tag <> </>
+                    // Fragments allow us to group elements together without creating an extra <div>
+                );
+            }
+
+            // props (properties) parameter is an object and contains all the attributes we give to a component.
+            // props make our components reusable
+
+            // another props shortcut is directly using the parameters in curly braces.
+            // ChatMessage({message, sender}) {}
+            function ChatMessage(props) {
+                const message = props.message; // we can do it like this or
+                const {sender} = props; // even this will do. It is a shortcut called Destructuring
+                // also const {sender, message} = props;
+
+                // if (sender === 'robot'){
+                //     return (
+                //         <div>
+                //             <img src="robot.png" width="50" />
+                //             {message}
+                //         </div>
+                //     );
+                // }
+
+                // instead of the if statement we can do a shortcut with the && which means if value is bla bla && (then) the result is bla bla . Value && result
+                return (// due to div its gonna be in a new line, since div is block element, but with <> fragments the chatmessage would be in the same line as the chat textbox
+                    <div>
+                        {sender === 'robot' && <img src="robot.png" width="50" />}
+                        {message}
+                        {sender === "user" && <img src="user.png" width="50" /> }
+                    </div>
+                );
+            }
+
+
+            // App component.
+            function App(){
+                return (
+                    // we can even add our own attributes to our components, using props.
+                <>
+                    {ChatInput()}
+                    <ChatMessage message="hello chatbot" sender="user" />
+                    <ChatMessage message="Hello how can i help you?" sender="robot" />
+                    <ChatMessage message="Can you get me todays date" sender="user" />
+                    <ChatMessage message="Today is January 5" sender="robot" />
+                </> // instead of typing curly braces and running the function we can also do <ChatInput></ChatInput> or <ChatInput /> This is called the Component Syntax
+                );
+            }
+
+            const container = document.querySelector(".js-container");
+            ReactDOM.createRoot(container).render(<App />); // it is best practice to create an App component to display the website. We can see that inside the component of App there are more components. So this lets use smaller and smaller pieces to build the site.
+            
+            // Some things learned:
+            // Component: piece of a website.
+            // Component: create our own HTMl elements.
+            // props: make components reusable
+            // checked Destructuring and guard operator && use-case in react.
+            // created App component.
+        </script>
+    </body>
+</html>
