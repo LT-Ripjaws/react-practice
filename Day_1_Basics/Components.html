@@ -59,6 +59,36 @@
                 );
             }
 
+            
+            function ChatMessages() {
+                const chatMessages = [{
+                    message: 'hello chatbot',
+                    sender: 'user',
+                    id: 'id1'
+                },{
+                    message: 'Hello how can i help you?',
+                    sender: "robot",
+                    id: 'id2'
+                },{
+                    message: "Can you get me todays date",
+                    sender: 'user',
+                    id: 'id3'
+                },{
+                    message: 'Today is January 5',
+                    sender: 'robot',
+                    id: 'id4'
+                }]
+
+                const chatMessageComponents = chatMessages.map((chatMessage) => {
+                    return(
+                        <ChatMessage message={chatMessage.message} sender={chatMessage.sender}
+                        key={chatMessage.id}/>
+                    )
+                });
+
+                return chatMessageComponents
+            }
+
 
             // App component.
             function App(){
@@ -66,10 +96,7 @@
                     // we can even add our own attributes to our components, using props.
                 <>
                     {ChatInput()}
-                    <ChatMessage message="hello chatbot" sender="user" />
-                    <ChatMessage message="Hello how can i help you?" sender="robot" />
-                    <ChatMessage message="Can you get me todays date" sender="user" />
-                    <ChatMessage message="Today is January 5" sender="robot" />
+                    <ChatMessages />
                 </> // instead of typing curly braces and running the function we can also do <ChatInput></ChatInput> or <ChatInput /> This is called the Component Syntax
                 );
             }
